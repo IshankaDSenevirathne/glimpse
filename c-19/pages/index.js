@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import {local_api_data,global_api_data} from "./api/api_data";
 import Navigation from "../components/Navigation/Navigation";
 import Landing from "../components/Landing/Landing";
+import Footer from "../components/Footer/Footer";
+import {LocalAnalytics,GlobalAnalytics} from "../components/Analytics/Analytics";
 
 //These use window hence using dynamic imports to render
 const FatalityRates = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.FatalityRates),{ ssr: false });
@@ -92,12 +94,28 @@ export default function Dashboard() {
                 {page===0 && <Landing />}
                 {page===1 && 
                   <div id="LocalCases">
-                    {localData && globalData?<DailyCovidCases cases={localData.data.daily_pcr_testing_data}/>:undefined}
+                    <div>
+                      <p className="text-3xl text-red-600 text-left pl-2 pt-10 ">Sri Lanka</p>
+                      <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
+                    </div>
+                    {localData ? <LocalAnalytics local={getLocalStats(localData)} />:undefined}
+                    <div>
+                      <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
+                    </div>
+                    {localData && globalData?<div className="hidden md:block"><DailyCovidCases cases={localData.data.daily_pcr_testing_data}/></div>:undefined}
                     {localData && globalData?<SLTotalBreakdown local={getLocalStats(localData)} />:undefined}
                   </div>
                 }
                 {page===2 && 
                   <div id="GlobalCases">
+                    <div>
+                      <p className="text-3xl text-blue-600 text-left pl-2 pt-10 ">Global</p>
+                      <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
+                    </div>
+                    {localData ? <GlobalAnalytics global={getGlobalTotal(localData)} />:undefined}
+                    <div>
+                      <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
+                    </div>
                     {localData && globalData?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
                     {localData && globalData?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
                   </div>
@@ -105,13 +123,16 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="fixed h-32 w-32">
-            <div className="fixed inset-x-0 bottom-10">                  
-              <div className="flex justify-center">
-                <Navigation getPage={getPage}/>  
-              </div>
-            </div>
+        </div>
+        <div className="fixed h-32 w-32">
+        <div className="fixed inset-x-0 bottom-10">                  
+          <div className="flex justify-center">
+            <Navigation getPage={getPage}/>  
           </div>
+        </div>
+        </div>
+        <div className="z-10">
+          <Footer />
         </div>
       </div>
     )
