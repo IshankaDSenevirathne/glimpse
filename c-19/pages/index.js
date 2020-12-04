@@ -14,8 +14,6 @@ const RecoveryRates = dynamic(() => import('../components/Graphs/Graphs').then(m
 const SLTotalBreakdown = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.SLTotalBreakdown),{ ssr: false });
 const DailyCovidCases = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.DailyCovidCases),{ ssr: false });
 
-const pageValues=[0,1,2,3,4,5,6,7,8];
-
 export default function Dashboard() {
   const [page,setPage]=useState(0);
   const {localData,isLoadingLocal,isErrorLocal}=local_api_data();
@@ -80,16 +78,6 @@ export default function Dashboard() {
         <div className="bg-gray-800 text-white font-sans min-h-screen min-w-screen">
           <div className="container mx-auto">
             <div>
-              <div className="flex justify-center items-center">
-                <div>
-                  <div>
-                    <p className="text-4xl sm:text-6xl text-center pt-5">COVID METER</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl text-gray-400 text-center">{new Date().getFullYear()}</p>
-                  </div>
-                </div>
-              </div>
               <div className="p-1 pt-10">
                 {page===0 && <Landing />}
                 {page===1 && 
@@ -116,22 +104,22 @@ export default function Dashboard() {
                     <div>
                       <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
                     </div>
-                    {localData && globalData?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
-                    {localData && globalData?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
+                    {(localData && globalData)?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
+                    {(localData && globalData)?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
                   </div>
                 }
               </div>
             </div>
           </div>
-        </div>
-        <div className="fixed h-32 w-32">
-        <div className="fixed inset-x-0 bottom-10">                  
-          <div className="flex justify-center">
-            <Navigation getPage={getPage}/>  
+          <div className="fixed h-32 w-32">
+            <div className="fixed inset-x-0 bottom-10">                  
+              <div className="flex justify-center">
+                <Navigation getPage={getPage}/>  
+              </div>
+            </div>
           </div>
         </div>
-        </div>
-        <div className="z-10">
+        <div>
           <Footer />
         </div>
       </div>

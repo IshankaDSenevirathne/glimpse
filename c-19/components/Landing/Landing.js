@@ -1,13 +1,26 @@
+import Prevention from "../Prevention/Prevention";
+import Image from 'next/image';
+import Virus from "../Animations/Virus";
+
 export default function Landing() {
     return (
         <div>
-            <div className="flex justify-center">
-                <img 
-                    src="/images/dashboard.svg"
-                    alt="starterBG"
-                />
+            <div className="flex justify-center items-center">
+                <div>
+                    <div>
+                        <p className="font-mono text-4xl sm:text-6xl text-center pt-5">COVIDOMETER</p>
+                    </div>
+                    <div>
+                        <p className="text-2xl text-gray-400 text-center">({new Date().getFullYear()})</p>
+                    </div>
+                </div>
             </div>
-            <p className="text-xl text-center mt-20">GET AN ORVERVIEW OF THE CURRENT COVID-19 SITUATION IN SRI LANKA</p>
+            <div className="flex justify-center">
+               <Virus/>
+            </div>
+            <div>
+                <Prevention/>
+            </div>
         </div>
     )
 }

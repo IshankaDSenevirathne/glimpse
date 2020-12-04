@@ -1,4 +1,3 @@
-
 export default function Navigation(props) {
     const {getPage}=props
     return (
