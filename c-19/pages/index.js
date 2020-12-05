@@ -5,14 +5,14 @@ import dynamic from "next/dynamic";
 import {local_api_data,global_api_data} from "./api/api_data";
 import Navigation from "../components/Navigation/Navigation";
 import Landing from "../components/Landing/Landing";
+import Footer from "../components/Footer/Footer";
+import {LocalAnalytics,GlobalAnalytics} from "../components/Analytics/Analytics";
 
 //These use window hence using dynamic imports to render
 const FatalityRates = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.FatalityRates),{ ssr: false });
 const RecoveryRates = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.RecoveryRates),{ ssr: false });
 const SLTotalBreakdown = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.SLTotalBreakdown),{ ssr: false });
 const DailyCovidCases = dynamic(() => import('../components/Graphs/Graphs').then(module=>module.DailyCovidCases),{ ssr: false });
-
-const pageValues=[0,1,2,3,4,5,6,7,8];
 
 export default function Dashboard() {
   const [page,setPage]=useState(0);
@@ -78,28 +78,34 @@ export default function Dashboard() {
         <div className="bg-gray-800 text-white font-sans min-h-screen min-w-screen">
           <div className="container mx-auto">
             <div>
-              <div className="flex justify-center items-center">
-                <div>
-                  <div>
-                    <p className="text-4xl sm:text-6xl text-center pt-5">COVID METER</p>
-                  </div>
-                  <div>
-                    <p className="text-2xl text-gray-400 text-center">{new Date().getFullYear()}</p>
-                  </div>
-                </div>
-              </div>
               <div className="p-1 pt-10">
                 {page===0 && <Landing />}
                 {page===1 && 
                   <div id="LocalCases">
-                    {localData && globalData?<DailyCovidCases cases={localData.data.daily_pcr_testing_data}/>:undefined}
+                    <div>
+                      <p className="text-3xl text-red-600 text-left pl-2 pt-10 ">Sri Lanka</p>
+                      <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
+                    </div>
+                    {localData ? <LocalAnalytics local={getLocalStats(localData)} />:undefined}
+                    <div>
+                      <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
+                    </div>
+                    {localData && globalData?<div className="hidden md:block"><DailyCovidCases cases={localData.data.daily_pcr_testing_data}/></div>:undefined}
                     {localData && globalData?<SLTotalBreakdown local={getLocalStats(localData)} />:undefined}
                   </div>
                 }
                 {page===2 && 
                   <div id="GlobalCases">
-                    {localData && globalData?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
-                    {localData && globalData?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
+                    <div>
+                      <p className="text-3xl text-blue-600 text-left pl-2 pt-10 ">Global</p>
+                      <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
+                    </div>
+                    {localData ? <GlobalAnalytics global={getGlobalTotal(localData)} />:undefined}
+                    <div>
+                      <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
+                    </div>
+                    {(localData && globalData)?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
+                    {(localData && globalData)?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
                   </div>
                 }
               </div>
@@ -112,6 +118,9 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <Footer />
         </div>
       </div>
     )

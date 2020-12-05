@@ -10,6 +10,7 @@
   "dependencies": {
     "apexcharts": "^3.22.2",
     "autoprefixer": "^9.8.6",
+    "gsap": "^3.5.1",
     "next": "10.0.3",
     "postcss": "^7.0.35",
     "postcss-flexbugs-fixes": "^5.0.2",
