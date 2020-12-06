@@ -1,11 +1,11 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/IshankaDSenevirathne/C19SLNextApp/dev/c-19/public/icons/icon-512x512.png" width="40%" align="center" >
 </p>
-<h1 align="center" style={color:#d62626}>
+<h1 align="center" style={fill:#d62626}>
 GLIMPSE
 </h1>
 <h4 align="left">
-  An Web Application to analyze the present status of COVID-19 in Sri Lanka.
+  A Web Application to analyze the present status of COVID-19 in Sri Lanka.
 </h4>
 
 ![HTML5](https://img.shields.io/badge/-HTML5-333333?style=flat&logo=HTML5)
@@ -23,7 +23,7 @@ GLIMPSE
 
 ## Introduction
 
-A web app to present covid 19 status/analytics in sri lanka and other countries.
+A web app to present Covid 19 status/analytics mainly in Sri Lanka.
 
 ## Getting Started
 
