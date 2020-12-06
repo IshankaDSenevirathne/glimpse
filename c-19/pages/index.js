@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import Head from 'next/head';
 import dynamic from "next/dynamic";
 //import components
 import {local_api_data,global_api_data} from "./api/api_data";
