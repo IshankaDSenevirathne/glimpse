@@ -1,8 +1,8 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/IshankaDSenevirathne/C19SLNextApp/dev/c-19/public/icons/icon-512x512.png" width="40%" align="center" >
 </p>
-<h1 align="center" style={fill:#d62626}>
-GLIMPSE
+<h1 align="center">
+-GLIMPSE-
 </h1>
 <h4 align="left">
   A Web Application to analyze the present status of COVID-19 in Sri Lanka.
