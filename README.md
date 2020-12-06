@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/IshankaDSenevirathne/C19SLNextApp/dev/c-19/public/icons/con-512x512.png" width="40%" align="center" >
+  <img src="https://raw.githubusercontent.com/IshankaDSenevirathne/C19SLNextApp/dev/c-19/public/icons/icon-512x512.png" width="40%" align="center" >
 </p>
-<h1 align="center" fill="#d62626">
+<h1 align="center" style={color:#d62626}>
 GLIMPSE
 </h1>
 <h4 align="left">
