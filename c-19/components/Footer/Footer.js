@@ -40,7 +40,7 @@ export default function Footer() {
             <div className="bg-gray-600 p-3 text-center">
                 <p className="text-center text-white">
                     Copyright &copy; {new Date().getFullYear()}{" "}
-                    <span className=" text-red-600">C19</span>
+                    <span className=" text-red-600">GLIMPSE</span>
                 </p>
             </div>  
         </div>
