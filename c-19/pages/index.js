@@ -83,10 +83,6 @@ export default function Dashboard() {
   );
     return (
       <div>
-        <Head>
-          <title>GLIMPSE</title>
-          <link rel="icon" href="/logo.svg" />
-        </Head>
         <div className="bg-gray-800 text-white font-sans min-h-screen min-w-screen">
           <div className="container mx-auto">
             <div>
