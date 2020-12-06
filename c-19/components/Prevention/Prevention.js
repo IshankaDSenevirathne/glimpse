@@ -4,6 +4,12 @@ export default function Prevention() {
 
     return (
         <div>
+            <div className="mt-5 md:mt-20">
+                <p className="font-mono sm:text-6xl text-4xl text-center">Covid-19 Prevention</p>
+            </div>
+            <div className="mt-5 mb-20">
+                <p className="font-mono sm:text-2xl text-xl text-center">Lets reshape the world together.</p>
+            </div>
             <div className="mt-5 mb-5">
                 <div className="bg-gray-800 lg:py-12 lg:flex lg:justify-center pl-1 pr-1">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

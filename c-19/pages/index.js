@@ -1,5 +1,4 @@
 import React,{useState} from "react"
-import Head from 'next/head';
 import dynamic from "next/dynamic";
 //import components
 import {local_api_data,global_api_data} from "./api/api_data";
@@ -38,6 +37,18 @@ export default function Dashboard() {
     update_date_time:data.data.update_date_time
   })
   const getPage=(value)=>{
+    if(value==="home"){
+      setPage(0)
+      return;
+    }
+    if(value==="sl"){
+      setPage(1)
+      return;
+    }
+    if(value==="gl"){
+      setPage(2)
+      return;
+    }
     if(value==="next"){
       setPage(page=>{
         if(page+1>2){
@@ -71,10 +82,6 @@ export default function Dashboard() {
   );
     return (
       <div>
-        <Head>
-          <title>C19SL</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
         <div className="bg-gray-800 text-white font-sans min-h-screen min-w-screen">
           <div className="container mx-auto">
             <div>
@@ -83,36 +90,40 @@ export default function Dashboard() {
                 {page===1 && 
                   <div id="LocalCases">
                     <div>
-                      <p className="text-3xl text-red-600 text-left pl-2 pt-10 ">Sri Lanka</p>
+                      <p className="text-4xl text-red-600 text-left pl-2 pt-10 ">Sri Lanka</p>
                       <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
                     </div>
                     {localData ? <LocalAnalytics local={getLocalStats(localData)} />:undefined}
                     <div>
                       <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
                     </div>
-                    {localData && globalData?<div className="hidden md:block"><DailyCovidCases cases={localData.data.daily_pcr_testing_data}/></div>:undefined}
-                    {localData && globalData?<SLTotalBreakdown local={getLocalStats(localData)} />:undefined}
+                    <div className="grid grid-rows-2 lg:grid-cols-2">
+                      {localData && globalData?<div className="hidden flex items-center md:block lg:col-span-1"><DailyCovidCases cases={localData.data.daily_pcr_testing_data}/></div>:undefined}
+                      {localData && globalData?<div className="row-span-2 lg:col-span-1"><SLTotalBreakdown local={getLocalStats(localData)} /></div>:undefined}
+                    </div>
                   </div>
                 }
                 {page===2 && 
                   <div id="GlobalCases">
                     <div>
-                      <p className="text-3xl text-blue-600 text-left pl-2 pt-10 ">Global</p>
+                      <p className="text-4xl text-blue-600 text-left pl-2 pt-10 ">Global</p>
                       <p className="text-lg text-white text-left pl-2 pt-4 pb-5">Today's analysis</p>
                     </div>
                     {localData ? <GlobalAnalytics global={getGlobalTotal(localData)} />:undefined}
                     <div>
                       <p className="text-lg text-white text-left pl-2 pt-10 pb-10">Current situation breakdown</p>
                     </div>
-                    {(localData && globalData)?<RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
-                    {(localData && globalData)?<FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} />:undefined}
+                    <div className="grid grid-rows-2 lg:grid-cols-2">
+                      {(localData && globalData)?<div className="lg:col-span-1 lg:row-span-none row-span-1"><RecoveryRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} /></div>:undefined}
+                      {(localData && globalData)?<div className="lg:col-span-1 lg:row-span-none row-span-1"><FatalityRates globalTotal={getGlobalTotal(localData)} global={globalData.Countries} /></div>:undefined}
+                    </div>
                   </div>
                 }
               </div>
             </div>
           </div>
           <div className="fixed h-32 w-32">
-            <div className="fixed inset-x-0 bottom-10">                  
+            <div className="fixed inset-x-0 md:top-0 bottom-10 h-16 w-full">                  
               <div className="flex justify-center">
                 <Navigation getPage={getPage}/>  
               </div>
@@ -125,4 +136,3 @@ export default function Dashboard() {
       </div>
     )
 }
-
